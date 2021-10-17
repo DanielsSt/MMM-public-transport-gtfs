@@ -1,0 +1,9 @@
+{
+  "ERROR_NO_GTFS_URL": "Missing <em>gtfsDataUrl</em> config value!",
+  "ERROR_FAILED_DL": "Failed to download GTFS data!",
+  "ERROR_PROCESS_ZIP": "Failed to process the ZIP file!",
+  "ERROR_INVALID_FILES": "Did not find necessary files in the ZIP!",
+  "ERROR_PARSE_ZIP": "Failed to parse ZIP contents!",
+  "ERROR_PROCESS_TXT": "Encountered error while processing data!",
+  "ERROR_NO_STOPS": "Missing <em>stops</em> config value!"
+}

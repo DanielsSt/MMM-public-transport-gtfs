@@ -1,0 +1,9 @@
+{
+  "ERROR_NO_GTFS_URL": "Trūkst <em>gtfsDataUrl</em> konfigurācijas vērtibas!",
+  "ERROR_FAILED_DL": "Neizdevās lejupialēdēt GTFS datus!",
+  "ERROR_PROCESS_ZIP": "Neizdevās ZIP apstrāde!",
+  "ERROR_INVALID_FILES": "ZIP saturā nezidevās atrast nepieciešamās datnes!",
+  "ERROR_PARSE_ZIP": "Neizdevās ZIP satura apstrāde!",
+  "ERROR_PROCESS_TXT": "Radās kļūda apstrādājot saturu!",
+  "ERROR_NO_STOPS": "Trūkst <em>gtfsDataUrl</em> konfigurācijas vērtibas!"
+}

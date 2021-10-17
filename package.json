@@ -1,0 +1,22 @@
+{
+  "name": "MMM-public-transport-gtfs",
+  "version": "1.0.0",
+  "description": "Todo: Insert description here!",
+  "main": "MMM-public-transport-gtfs.js",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-eslint": "latest",
+    "grunt-jsonlint": "latest",
+    "grunt-markdownlint": "^1.0.13",
+    "grunt-stylelint": "latest",
+    "grunt-yamllint": "latest",
+    "stylelint-config-standard": "latest",
+    "time-grunt": "latest"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "jszip": "^3.7.1"
+  }
+}
