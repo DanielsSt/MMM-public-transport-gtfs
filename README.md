@@ -7,7 +7,7 @@ Aggregates compressed [GTFS static](https://developers.google.com/transit/gtfs) 
 Currently, only tested with gtfs.zip provided by ["Rīgas satiksme"](https://www.rigassatiksme.lv/en/) and some randomly chosen GTFS sources.<br>
 _Maybe worth adding list of tested sources, hmm_
 
-![](screenshots\Screenshot.png)
+![](https://raw.githubusercontent.com/DanielsSt/MMM-public-transport-gtfs/master/screenshots/Screenshot.png)
 
 ## Using the module
 
