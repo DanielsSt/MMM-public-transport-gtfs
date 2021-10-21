@@ -117,7 +117,7 @@ Module.register("MMM-public-transport-gtfs", {
 							(hasCalendar && calendar[self.dayColumns[currentTime.getDay()]] === 1)
 							|| self.isEnabledByException(currentTime, calendarExceptions)
 						)
-						&& self.isNotDisabledByExceptions(currentTime, calendarExceptions)
+						&& !self.isDisabledByExceptions(currentTime, calendarExceptions)
 					) {
 						nextStops.push(stopTime);
 					}
@@ -256,13 +256,13 @@ Module.register("MMM-public-transport-gtfs", {
 		return exceptionOutcome;
 	},
 
-	isNotDisabledByExceptions(currentTime, calendarExceptions) {
+	isDisabledByExceptions(currentTime, calendarExceptions) {
 		// if no exceptions - great!
 		if (typeof calendarExceptions === "undefined" || calendarExceptions === null) {
-			return true;
+			return false;
 		}
 
-		var exceptionOutcome = true;
+		var exceptionOutcome = false;
 
 		calendarExceptions.every(function(calendarException, index, array) {
 			// if exception is today
@@ -271,7 +271,7 @@ Module.register("MMM-public-transport-gtfs", {
 				&& calendarException.date.getMonth() === currentTime.getMonth()
 				&& calendarException.date.getFullYear() === currentTime.getFullYear()
 			) {
-				exceptionOutcome = calendarException.exception_type !== "1"; // 1 - new service just for this date, 2 - cancelled for today
+				exceptionOutcome = calendarException.exception_type === "2"; // 1 - new service just for this date, 2 - cancelled for today
 				return false;
 			}
 		});

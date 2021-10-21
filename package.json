@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.23.0",
+    "csv-parse": "^4.16.3",
     "jszip": "^3.7.1"
   }
 }

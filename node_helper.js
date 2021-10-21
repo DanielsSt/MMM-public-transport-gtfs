@@ -2,6 +2,7 @@ var NodeHelper = require("node_helper");
 var JSZip = require("jszip");
 var axios = require("axios");
 var Log = require("logger");
+const parse = require("csv-parse/lib/sync");
 const {keys} = require("grunt/lib/grunt/option");
 
 module.exports = NodeHelper.create({
@@ -102,16 +103,9 @@ module.exports = NodeHelper.create({
 				}
 
 				contents[filename].then(function(fileContents){
-					var rowsRaw = fileContents.split("\n");
-					var cols = rowsRaw[0].split(",").map(function(col) {return col.trim()});
-					rowsRaw.shift();
-					rowsRaw.forEach(function(row, index, array) {
-						var rowCols = row.split(",");
-						var rowParsed = {};
-						rowCols.forEach(function(value, index, array) {
-							rowParsed[cols[index]] = value.replace(/"/g, "");
-						});
-						self.unzippedGtfsData[filename.replace(".txt", "")].push(rowParsed);
+					self.unzippedGtfsData[filename.replace(".txt", "")] = parse(fileContents.trim(), {
+						columns: true,
+						skip_empty_lines: true,
 					});
 				}).catch(function (error) {
 					self.logError("Failed to parse ZIP contents!", "ERROR_PARSE_ZIP",
@@ -270,7 +264,7 @@ module.exports = NodeHelper.create({
 	parseGtfsDate: function (dateStr) {
 		return new Date(
 			parseInt(dateStr.substr(0, 4)),
-			parseInt(dateStr.substr(4, 2)),
+			parseInt(dateStr.substr(4, 2)) - 1,
 			parseInt(dateStr.substr(6, 2))
 		);
 	},
@@ -278,7 +272,7 @@ module.exports = NodeHelper.create({
 	parseGtfsTime: function (timeStr) {
 		return new Date(
 			1970,
-			1,
+			0,
 			1,
 			parseInt(timeStr.substr(0, 2)),
 			parseInt(timeStr.substr(3, 2)),
