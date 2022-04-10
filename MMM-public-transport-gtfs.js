@@ -234,34 +234,15 @@ Module.register("MMM-public-transport-gtfs", {
 	},
 
 	isEnabledByException(currentTime, calendarExceptions) {
-		// if no exceptions - great!
-		if (typeof calendarExceptions === "undefined" || calendarExceptions === null) {
-			return false;
-		}
-
-		var exceptionOutcome = false;
-
-		calendarExceptions.every(function(calendarException, index, array) {
-			// if exception is today
-			if(
-				calendarException.date.getDate() === currentTime.getDay()
-				&& calendarException.date.getMonth() === currentTime.getMonth()
-				&& calendarException.date.getFullYear() === currentTime.getFullYear()
-			) {
-				exceptionOutcome = calendarException.exception_type === "1"; // 1 - new service just for this date, 2 - cancelled for today
-				return false;
-			}
-		});
-
-		return exceptionOutcome;
+		return this.hasException(currentTime, calendarExceptions, "1");
 	},
 
 	isDisabledByExceptions(currentTime, calendarExceptions) {
-		// if no exceptions - great!
-		if (typeof calendarExceptions === "undefined" || calendarExceptions === null) {
-			return false;
-		}
+		return this.hasException(currentTime, calendarExceptions, "2");
+	},
 
+	// Not a fan of naming these as exceptions either
+	hasException(currentTime, calendarExceptions, exceptionType) {
 		var exceptionOutcome = false;
 
 		calendarExceptions.every(function(calendarException, index, array) {
@@ -271,7 +252,7 @@ Module.register("MMM-public-transport-gtfs", {
 				&& calendarException.date.getMonth() === currentTime.getMonth()
 				&& calendarException.date.getFullYear() === currentTime.getFullYear()
 			) {
-				exceptionOutcome = calendarException.exception_type === "2"; // 1 - new service just for this date, 2 - cancelled for today
+				exceptionOutcome = calendarException.exception_type === exceptionType; // 1 - new service just for this date, 2 - cancelled for today
 				return false;
 			}
 		});
@@ -294,11 +275,8 @@ Module.register("MMM-public-transport-gtfs", {
 		if (!this.config.use24HrClock) {
 			if (hours > 12) {
 				hours -= 12;
-			}
-
-			if (hours < 11) {
 				pm = " PM";
-			}else {
+			} else {
 				pm = " AM";
 			}
 		}

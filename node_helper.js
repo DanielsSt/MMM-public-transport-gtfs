@@ -56,9 +56,9 @@ module.exports = NodeHelper.create({
 				} else {
 					self.logError("Could not load data.", "ERROR_FAILED_DL", response.status);
 				}
-			}).catch(function(error){
+			}).catch(function (error) {
 				self.logError("Could not load data.!", "ERROR_FAILED_DL",
-					{ message: error.message, stack: error.stack }
+					{message: error.message, stack: error.stack}
 				);
 				throw error;
 			});
@@ -263,9 +263,9 @@ module.exports = NodeHelper.create({
 
 	parseGtfsDate: function (dateStr) {
 		return new Date(
-			parseInt(dateStr.substr(0, 4)),
-			parseInt(dateStr.substr(4, 2)) - 1,
-			parseInt(dateStr.substr(6, 2))
+			parseInt(dateStr.slice(0, 4)),
+			parseInt(dateStr.slice(4, 6)) - 1,
+			parseInt(dateStr.slice(6, 8))
 		);
 	},
 
@@ -274,9 +274,9 @@ module.exports = NodeHelper.create({
 			1970,
 			0,
 			1,
-			parseInt(timeStr.substr(0, 2)),
-			parseInt(timeStr.substr(3, 2)),
-			parseInt(timeStr.substr(6, 2))
+			parseInt(timeStr.slice(0, 2)),
+			parseInt(timeStr.slice(3, 5)),
+			parseInt(timeStr.slice(6, 8))
 		);
 	},
 
