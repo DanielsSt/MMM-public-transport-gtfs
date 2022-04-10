@@ -7,6 +7,8 @@ Module.register("MMM-public-transport-gtfs", {
 		dataUpdateInterval: 86400000,
 		// show next 5 transports
 		display: 10,
+		// show transports leaving 10 minutes in the future
+		minutesOffset: 10,
 
 		use24HrClock: true,
 
@@ -97,7 +99,7 @@ Module.register("MMM-public-transport-gtfs", {
 			var wrapperDataRequest = document.createElement("div");
 
 			var content = "";
-			var currentTime = new Date();
+			var currentTime = new Date((new Date()).getTime() + this.config.minutesOffset * 60000);
 
 			var nextStops = [];
 

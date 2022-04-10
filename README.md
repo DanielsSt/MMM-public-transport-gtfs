@@ -36,14 +36,16 @@ var config = {
 
 ## Configuration options
 
-| Option           | Description                                               
-|----------------- |-----------------------------------------------------------
-| `gtfsDataUrl`        | *Required* URL to zipped GTFS data <br><br> **Type:** `string`(URL) <br> *Example* `https://saraksti.rigassatiksme.lv/riga/gtfs.zip`                         
-| `stops`  | *Required* stop_ids of stops you want to display <br>(can be found on `stops.txt`)<br><br>**Type:** `string[]` <br>Default `[]`
-| `domUpdateInterval`  | *Optional* Time between content updates on screen <br><br>**Type:** `int`(milliseconds) <br>Default `60000` milliseconds (1 minute)
-| `dataUpdateInterval`  | *Optional* Time between GTFS data updates<br><br>**Type:** `int`(milliseconds) <br>Default `86400000` milliseconds (1 day)
-| `display`  | *Optional* How many upcoming transports to display<br><br>**Type:** `int` <br>Default `10`
-| `use24HrClock`  | *Optional* Display 24hr clock<br><br>**Type:** `bool` <br>Default `true`
+| Option               | Description                                                                                                                          |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `gtfsDataUrl`        | *Required* URL to zipped GTFS data <br><br> **Type:** `string`(URL) <br> *Example* `https://saraksti.rigassatiksme.lv/riga/gtfs.zip` |
+| `stops`              | *Required* stop_ids of stops you want to display <br>(can be found on `stops.txt`)<br><br>**Type:** `string[]` <br>Default `[]`      |
+| `domUpdateInterval`  | *Optional* Time between content updates on screen <br><br>**Type:** `int`(milliseconds) <br>Default `60000` milliseconds (1 minute)  |
+| `dataUpdateInterval` | *Optional* Time between GTFS data updates<br><br>**Type:** `int`(milliseconds) <br>Default `86400000` milliseconds (1 day)           |
+| `display`            | *Optional* How many upcoming transports to display<br><br>**Type:** `int` <br>Default `10`                                           |
+| `use24HrClock`       | *Optional* Display 24hr clock<br><br>**Type:** `bool` <br>Default `true`                                                             |
+| `minutesOffset`      | *Optional* Offset transport list by X minutes<br><br>**Type:** `int` <br>Default `10`                                                |
+
 
 ### Example config
 
@@ -60,7 +62,9 @@ config: {
     // display time in 24hr format, or set to false - for 12hr clock
     use24HrClock: true,
     // find your stops in stops.txt
-    stops: ["0709", "0079", "0075", "7980", "2017"]
+    stops: ["0709", "0079", "0075", "7980", "2017"],
+    // show transports leaving at least 5 minutes in the future
+    minutesOffset: 5
 }
 ```
 
