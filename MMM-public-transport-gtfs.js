@@ -108,10 +108,10 @@ Module.register("MMM-public-transport-gtfs", {
 					stopTime.departure_time.getMinutes() > currentTime.getMinutes()
 					|| stopTime.departure_time.getHours() > currentTime.getHours()
 				) {
-					var trip = self.dataRequest.trips[stopTime.trip_id];
-					var calendar = self.dataRequest.serviceCalendar[trip.service_id];
-					var calendarExceptions = self.dataRequest.calendarExceptions[trip.service_id];
-					var hasCalendar = typeof calendar !== "undefined";
+					var trip = self.dataRequest.trips[stopTime.trip_id] ?? [];
+					var calendar = self.dataRequest.serviceCalendar[trip.service_id] ?? [];
+					var calendarExceptions = self.dataRequest.calendarExceptions[trip.service_id] ?? [];
+					var hasCalendar = calendar !== [];
 
 					if (
 						(!hasCalendar || self.isInTimePeriod(currentTime, calendar.start_date, calendar.end_date))
