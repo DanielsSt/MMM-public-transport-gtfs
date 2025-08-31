@@ -50,8 +50,8 @@ module.exports = NodeHelper.create({
 
 		Log.info(self.name, "Pulling GTFS data", urlApi);
 
-		if (!self.isValidHttpUrl(url)) {
-			fs.readFile(url, (error, data) => {
+		if (!self.isValidHttpUrl(urlApi)) {
+			fs.readFile(urlApi, (error, data) => {
 				if (error != null) {
 					self.logError("Could not load data! (not valid URL)", "ERROR_FAILED_DL",
 						{message: error.message, stack: error.stack}
