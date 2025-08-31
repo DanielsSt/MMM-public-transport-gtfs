@@ -38,7 +38,7 @@ var config = {
 
 | Option               | Description                                                                                                                          |
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| `gtfsDataUrl`        | *Required* URL to zipped GTFS data <br><br> **Type:** `string`(URL) <br> *Example* `https://saraksti.rigassatiksme.lv/riga/gtfs.zip` |
+| `gtfsDataUrl`        | *Required* URL or path to zipped GTFS data <br><br> **Type:** `string`(URL / valid path) <br> *Example* `https://saraksti.rigassatiksme.lv/riga/gtfs.zip` / `/home/user/gtfs.zip` |
 | `stops`              | *Required* stop_ids of stops you want to display <br>(can be found on `stops.txt`)<br><br>**Type:** `string[]` <br>Default `[]`      |
 | `domUpdateInterval`  | *Optional* Time between content updates on screen <br><br>**Type:** `int`(milliseconds) <br>Default `60000` milliseconds (1 minute)  |
 | `dataUpdateInterval` | *Optional* Time between GTFS data updates<br><br>**Type:** `int`(milliseconds) <br>Default `86400000` milliseconds (1 day)           |
