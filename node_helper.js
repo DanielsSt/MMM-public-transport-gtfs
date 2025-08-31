@@ -61,7 +61,9 @@ module.exports = NodeHelper.create({
 
 				Log.info(self.name, "GTFS data found on disk, unzipping");
 				self.unzipGtfsData(data);
-			})
+			});
+
+			return;
 		}
 
 		axios.get(urlApi, {responseType: "arraybuffer"})
@@ -306,6 +308,7 @@ module.exports = NodeHelper.create({
 		);
 	},
 
+	// credit: https://stackoverflow.com/a/43467144
 	isValidHttpUrl: function(string) {
 		let url;
 		
