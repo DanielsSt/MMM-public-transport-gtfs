@@ -111,7 +111,7 @@ Module.register("MMM-public-transport-gtfs", {
 					var trip = self.dataRequest.trips[stopTime.trip_id] ?? [];
 					var calendar = self.dataRequest.serviceCalendar[trip.service_id] ?? [];
 					var calendarExceptions = self.dataRequest.calendarExceptions[trip.service_id] ?? [];
-					var hasCalendar = calendar !== [];
+					var hasCalendar = calendar != [];
 
 					if (
 						(!hasCalendar || self.isInTimePeriod(currentTime, calendar.start_date, calendar.end_date))
