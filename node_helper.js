@@ -4,6 +4,7 @@ var axios = require("axios");
 var Log = require("logger");
 const parse = require("csv-parse/lib/sync");
 const {keys} = require("grunt/lib/grunt/option");
+const fs = require("fs");
 
 module.exports = NodeHelper.create({
 	stops: [],
@@ -48,6 +49,21 @@ module.exports = NodeHelper.create({
 		this.filesUnzipped = 0;
 
 		Log.info(self.name, "Pulling GTFS data", urlApi);
+
+		if (!self.isValidHttpUrl(url)) {
+			fs.readFile(url, (error, data) => {
+				if (error != null) {
+					self.logError("Could not load data! (not valid URL)", "ERROR_FAILED_DL",
+						{message: error.message, stack: error.stack}
+					);
+					throw error;
+				}
+
+				Log.info(self.name, "GTFS data found on disk, unzipping");
+				self.unzipGtfsData(data);
+			})
+		}
+
 		axios.get(urlApi, {responseType: "arraybuffer"})
 			.then(function(response) {
 				if (response.status === 200) {
@@ -57,7 +73,7 @@ module.exports = NodeHelper.create({
 					self.logError("Could not load data.", "ERROR_FAILED_DL", response.status);
 				}
 			}).catch(function (error) {
-				self.logError("Could not load data.!", "ERROR_FAILED_DL",
+				self.logError("Could not load data!", "ERROR_FAILED_DL",
 					{message: error.message, stack: error.stack}
 				);
 				throw error;
@@ -280,7 +296,7 @@ module.exports = NodeHelper.create({
 		);
 	},
 
-	logError: function(message, code, additionalData= null) {
+	logError: function(message, code, additionalData=null) {
 		Log.error(this.name, code, message, additionalData);
 		this.sendSocketNotification(this.name + "-SET_NOTIFICATIONS",
 			{
@@ -288,6 +304,18 @@ module.exports = NodeHelper.create({
 				additionalData: (additionalData !== null ? "<br><pre>" + JSON.stringify(additionalData, null, 2) + "<pre>" : "")
 			}
 		);
+	},
+
+	isValidHttpUrl: function(string) {
+		let url;
+		
+		try {
+			url = new URL(string);
+		} catch (_) {
+			return false;  
+		}
+
+		return url.protocol === "http:" || url.protocol === "https:";
 	},
 
 });
